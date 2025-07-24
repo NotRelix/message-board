@@ -4,11 +4,14 @@ const path = require("node:path");
 const PORT = process.env.PORT || 3000;
 
 const homeRouter = require('./routes/homeRouter');
+const newRouter = require("./routes/newRouter");
 
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
+app.use(express.urlencoded({ extended: true }));
 
 app.use('/', homeRouter);
+app.use('/new', newRouter);
 
 app.listen(PORT, () => {
   console.log(`Listening on port ${PORT}`);
