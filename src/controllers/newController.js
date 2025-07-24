@@ -7,8 +7,7 @@ module.exports = {
   },
   post: (req, res) => {
     const { name, message } = req.body;
-    console.log(name, message);
-    messages.push({ user: name, text: message, added: new Date() })
+    messages.push({ id: Number(messages.length), user: name, text: message, added: new Date() });
     res.redirect("/");
   }
 }
