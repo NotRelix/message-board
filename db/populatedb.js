@@ -20,12 +20,16 @@ VALUES
 
 async function main() {
   console.log("seeding...");
+  const ssl = process.env.NODE_ENV === "production"
+    ? { rejectUnauthorized: false }
+    : false;
   const client = new Client({
     host: process.env.PGHOST,
     user: process.env.PGUSER,
     password: process.env.PGPASSWORD,
     database: process.env.PGDATABASE,
     port: process.env.PGPORT,
+    ssl,
   });
   await client.connect();
   await client.query(SQL);
