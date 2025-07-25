@@ -1,8 +1,9 @@
-const messages = require('../data/messages')
+const { getUserById } = require('../../db/query');
 
 module.exports = {
-  get: (req, res) => {
+  get: async (req, res) => {
     const { id } = req.params;
-    res.render('message', { message: messages[id] });
+    const user = await getUserById(id);
+    res.render('message', { message: user });
   }
 }

@@ -1,13 +1,12 @@
-const messages = require('../data/messages')
+const { insertMessage } = require('../../db/query');
 
 module.exports = {
   get: (req, res) => {
-    console.log("hello get");
     res.render('form');
   },
-  post: (req, res) => {
+  post: async (req, res) => {
     const { name, message } = req.body;
-    messages.push({ id: Number(messages.length), user: name, text: message, added: new Date() });
+    await insertMessage(name, message);
     res.redirect("/");
   }
 }
